@@ -1,0 +1,118 @@
+<div class="custom-section {{ section.settings.desktop_alignment }} {{ section.settings.mobile_alignment }}">
+  <div class="text-content">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.text }}</p>
+    <a href="{{ section.settings.button_url }}" class="btn">{{ section.settings.button_text }}</a>
+  </div>
+  <div class="image-content">
+    {% if section.settings.image != blank %}
+      <img src="{{ section.settings.image | img_url: 'large' }}" alt="{{ section.settings.title }}" />
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .custom-section.right {
+    flex-direction: row-reverse;
+  }
+  
+  .custom-section .text-content {
+    flex: 1;
+  }
+  
+  .custom-section .image-content {
+    flex: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .custom-section {
+      flex-direction: column;
+    }
+  
+    .custom-section.bottom {
+      flex-direction: column-reverse;
+    }
+  }
+  {% endstylesheet %}
+
+{% schema %}
+  {
+    "name": "Relume Image with Text",
+    "class": "section",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Default Title"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Default Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Default Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Desktop Image Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile Image Alignment",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top"
+    }
+  ],
+    "presets": [
+      {
+        "name": "Relume Image with Text"
+      }
+    ]
+  }
+{% endschema %}
